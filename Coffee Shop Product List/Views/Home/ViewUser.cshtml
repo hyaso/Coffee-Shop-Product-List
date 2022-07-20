@@ -1,0 +1,15 @@
+﻿@model Coffee_Shop_Product_List.Models.CoffeeUser
+
+@{
+    ViewData["Title"] = "ViewUser";
+}
+
+<h1>Welcome to our coffee shop @Model.FirstName @Model.LastName</h1>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
