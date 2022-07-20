@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel.DataAnnotations;
 
 
+
 namespace Coffee_Shop_Product_List
 {
     public class Program
@@ -50,7 +51,7 @@ namespace Coffee_Shop_Product_List
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<RecordStoreContext>(options =>
+            services.AddDbContext<CoffeeShopDbContext>(options =>
                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
         public void Configure(IApplicationBuilder app)
@@ -60,36 +61,32 @@ namespace Coffee_Shop_Product_List
         }
     }
 
-    public class RecordStoreContext : DbContext
+    public class CoffeeShopDbContext : DbContext
     {
-        public RecordStoreContext(DbContextOptions<RecordStoreContext> options) : base(options)
+        public CoffeeShopDbContext(DbContextOptions<CoffeeShopDbContext> options) : base(options)
         {
             // Nothing needed
         }
 
-        public DbSet<Company> Company { get; set; }
-        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Products> Products { get; set; }
     }
 
-    public class Company
+    public class Products
     {
         [Key]
         public int ID { get; set; }
         public string Name { get; set; }
-        public bool Hiring { get; set; }
-        public string Location { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+        public string Category { get; set; }
+
     }
 
-    public class Employee
+    public class ProductsList
     {
-        [Key]
-        public int ID { get; set; }
-        public string SSN { get; set; }
-        public DateTime DOB { get; set; }
-        public string Phone { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Department { get; set; }
+        public List<Products> ProductList { get; set; }
+
     }
+
 
 }

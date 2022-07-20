@@ -7,21 +7,19 @@ namespace Coffee_Shop_Product_List.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly RecordStoreContext _recordStoreContext;
+        private readonly CoffeeShopDbContext _coffeeShopDbContext;
 
-        public HomeController(ILogger<HomeController> logger, RecordStoreContext newRecordStoreContext)
+        public HomeController(ILogger<HomeController> logger, CoffeeShopDbContext newRecordStoreContext)
         {
             _logger = logger;
-            _recordStoreContext = newRecordStoreContext;
+            _coffeeShopDbContext = newRecordStoreContext;
         }
 
         public IActionResult Index()
         {
-            var empCount = _recordStoreContext.Employee.Count();
-            var companyCount = _recordStoreContext.Company.Count();
             return View();
         }
-
+        
 
         [HttpPost]
         public IActionResult CreateUserSubmit(string firstName, string lastName, string email, string password)
