@@ -1,0 +1,17 @@
+﻿@model Coffee_Shop_Product_List.Products[]
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of Products</h1>
+
+<h2>
+    @{
+        foreach (var product in Model)
+        {
+            <p><a href="details?productid=@product.ID">@product.ID. @product.Name</a></p>
+        }
+    }
+</h2>
+
+

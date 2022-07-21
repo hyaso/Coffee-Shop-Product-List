@@ -16,36 +16,31 @@ namespace Coffee_Shop_Product_List.Controllers
 
         public ActionResult Index()
         {
-            ProductsList productsList = new ProductsList();
-            List<Products> listOfItems = new List<Products>();
-            foreach (var item in _coffeeShopDbContext.Products)
-            {
-                listOfItems.Add(item);
-            }
-            productsList.ProductList = listOfItems;
-            return View(productsList);
+            var productList = _coffeeShopDbContext.Products.ToArray();
+            return View(productList);
         }
 
-        public IActionResult Details(int ID)
+        public IActionResult Details(int productID)
         {
-            Products targetProduct = null;
-            foreach (var item in _coffeeShopDbContext.Products)
+            Products productDescription = null;
+            var productList = _coffeeShopDbContext.Products.ToArray();
+            foreach (var product in productList)
             {
-                if (item.ID == ID)
+                if (product.ID == productID)
                 {
-                    targetProduct = item;
+                    productDescription = product;
                     break;
                 }
             }
-            if (targetProduct != null)
+
+            if (productDescription != null)
             {
-                return View(targetProduct);
+                return View(productDescription);
             }
             else
             {
-                throw new Exception("Something went wrong with your code!");
+                throw new Exception("Sorry");
             }
-
         }
     }
 }
